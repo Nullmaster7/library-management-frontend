@@ -1,6 +1,5 @@
 import axios from 'axios';
 
-// Fetch all books
 export const fetchBooks = async () => {
     try {
         const response = await axios.get(`${process.env.REACT_APP_API_URL}/books`);

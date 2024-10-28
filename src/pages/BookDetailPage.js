@@ -7,11 +7,16 @@
 
 
 import React from 'react'
+import BookDetail from '../components/BookListComp/BookDetail'
+import PageWrapper from '../hoc/PageWrapper';
 
 const BookDetailPage = () => {
     return (
-        <div>BookDetailPage</div>
+        <div className="book-list-page">
+            <h1 className='title'>Book Details</h1>
+            <BookDetail />
+        </div>
     )
 }
 
-export default BookDetailPage
+export default PageWrapper(BookDetailPage)

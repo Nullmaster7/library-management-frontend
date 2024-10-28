@@ -1,15 +1,17 @@
-// UserListPage: This page will list all registered users.
-// UserListComp: Component to display users in a grid.
-
 import React from 'react'
+import PageWrapper from '../hoc/PageWrapper';
+import UserListComp from '../components/UserListComp/UserListComp';
 
 const UserListPage = () => {
     return (
-        <div>UserListPage</div>
+        <div >
+            <h1 className='title'>Users</h1>
+            <UserListComp />
+        </div>
     )
 }
 
-export default UserListPage
+export default PageWrapper(UserListPage)
 
 // UserListComp.js: Fetch and display the list of users from the Redux store.
 // UserDetailPage: Implement routing to render the details of a selected user.

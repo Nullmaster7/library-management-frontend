@@ -5,11 +5,16 @@
 // Option to return a currently borrowed book.
 
 import React from 'react'
+import UserDetail from '../components/UserListComp/UserDetail'
+import PageWrapper from '../hoc/PageWrapper';
 
 const UserDetailPage = () => {
     return (
-        <div>UserDetailPage</div>
+        <div className="book-list-page">
+            <h1 className='title'>User's Details</h1>
+            <UserDetail />
+        </div>
     )
 }
 
-export default UserDetailPage
+export default PageWrapper(UserDetailPage)

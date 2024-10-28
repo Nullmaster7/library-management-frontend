@@ -1,4 +1,3 @@
-// booksSlice.js
 import { createSlice } from '@reduxjs/toolkit';
 import { fetchBooks } from '../../services/bookService';
 
