@@ -21,6 +21,8 @@ export const fetchBookDetails = async (bookId) => {
 export const borrowBook = async (userId, bookId) => {
     try {
         const response = await axios.post(`${process.env.REACT_APP_API_URL}/users/${userId}/borrow/${bookId}`);
+        const url = `${process.env.REACT_APP_API_URL}/users/${userId}/borrow/${bookId}`;
+        console.log('Borrow URL:', url);
         return response.data;
     } catch (error) {
         throw new Error('Failed to borrow the book');

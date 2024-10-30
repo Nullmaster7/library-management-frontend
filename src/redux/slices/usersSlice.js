@@ -36,6 +36,7 @@ export const loadUserDetails = (userId) => async (dispatch) => {
     dispatch(setLoading(true));
     try {
         const userDetails = await fetchUserDetails(userId);
+        console.log("Fetched User Details: ", userDetails);
         dispatch(setSelectedUser(userDetails));
     } catch (error) {
         dispatch(setError("Error fetching user details"));
@@ -47,8 +48,8 @@ export const loadUserDetails = (userId) => async (dispatch) => {
 export const returnUserBook = (userId, bookId) => async (dispatch) => {
     dispatch(setLoading(true));
     try {
-        await returnBook(userId, bookId); // Call service to update backend
-        dispatch(loadUserDetails(userId)); // Reload user details to reflect returned book
+        await returnBook(userId, bookId);
+        dispatch(loadUserDetails(userId));
     } catch (error) {
         dispatch(setError("Error returning book"));
     } finally {

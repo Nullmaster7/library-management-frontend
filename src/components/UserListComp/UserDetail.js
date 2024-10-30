@@ -25,37 +25,26 @@ const UserDetail = () => {
         <Card sx={{ maxWidth: 800, margin: 'auto', padding: 2 }}>
             <CardContent>
                 <Typography variant="h5">{user.name}</Typography>
-                <Typography variant="subtitle1">Books Currently Borrowed:</Typography>
+                <Typography variant="subtitle1">Borrowing Histories:</Typography>
                 <List>
-                    {user.currentlyBorrowedBooks && user.currentlyBorrowedBooks.length > 0 ? (
-                        user.currentlyBorrowedBooks.map((book) => (
-                            <ListItem key={book.id}>
-                                <ListItemText primary={book.title} />
-                                <Button
-                                    variant="contained"
-                                    color="secondary"
-                                    onClick={() => handleReturnBook(book.id)}
-                                >
-                                    Return
-                                </Button>
+                    {user.BorrowingHistories && user.BorrowingHistories.length > 0 ? (
+                        user.BorrowingHistories.map((history) => (
+                            <ListItem key={history.id}>
+                                <ListItemText
+                                    primary={`${history.Book.title} - Rating: ${history.rating !== null ? history.rating : 'N/A'}`}
+                                />
+                                {history.returnedAt === null &&
+                                    <Button
+                                        variant="contained"
+                                        color="secondary"
+                                        onClick={() => handleReturnBook(history.bookId)}
+                                    >
+                                        Return
+                                    </Button>}
                             </ListItem>
                         ))
                     ) : (
                         <Typography>No books currently borrowed.</Typography>
-                    )}
-                </List>
-                <Typography variant="subtitle1" sx={{ marginTop: 2 }}>Books Previously Borrowed:</Typography>
-                <List>
-                    {user.previouslyBorrowedBooks && user.previouslyBorrowedBooks.length > 0 ? (
-                        user.previouslyBorrowedBooks.map((book) => (
-                            <ListItem key={book.id}>
-                                <ListItemText
-                                    primary={`${book.title} - Rating: ${book.rating || 'N/A'}`}
-                                />
-                            </ListItem>
-                        ))
-                    ) : (
-                        <Typography>No previous borrowings.</Typography>
                     )}
                 </List>
             </CardContent>
