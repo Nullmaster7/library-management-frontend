@@ -11,41 +11,49 @@ const HomePage = () => {
     };
 
     return (
-        <Grid2
-            container
-            spacing={2}
-            justifyContent="center"
-            alignItems="center"
-        >
-            <Grid2 item>
-                <Card sx={{ width: 300, opacity: 0.8 }} onClick={() => handleCardClick('/users')}>
-                    <CardActionArea>
-                        <CardContent>
-                            <Typography sx={{ textAlign: 'center' }} variant="h5" component="div">
-                                Users
-                            </Typography>
-                            <Typography sx={{ textAlign: 'center' }} variant="body2" color="text.secondary">
-                                See user details
-                            </Typography>
-                        </CardContent>
-                    </CardActionArea>
-                </Card>
+        <div style={{ textAlign: 'center', padding: '20px' }}>
+            <Typography
+                sx={{ fontWeight: 'bold', mb: 15, fontSize: '2.5rem', color: '#ffffff', opacity: '0.8' }}
+            >
+                Library Management System
+            </Typography>
+
+            <Grid2
+                container
+                spacing={2}
+                justifyContent="center"
+                alignItems="center"
+            >
+                <Grid2 item>
+                    <Card sx={{ width: 300, opacity: 0.8 }} onClick={() => handleCardClick('/users')}>
+                        <CardActionArea>
+                            <CardContent>
+                                <Typography sx={{ textAlign: 'center', fontWeight: 'bold' }} variant="h5" component="div">
+                                    Users
+                                </Typography>
+                                <Typography sx={{ textAlign: 'center', fontSize: '1rem' }} variant="body2" color="text.secondary">
+                                    See user details
+                                </Typography>
+                            </CardContent>
+                        </CardActionArea>
+                    </Card>
+                </Grid2>
+                <Grid2 item>
+                    <Card sx={{ width: 300, opacity: 0.8 }} onClick={() => handleCardClick('/books')}>
+                        <CardActionArea>
+                            <CardContent>
+                                <Typography sx={{ textAlign: 'center', fontWeight: 'bold' }} variant="h5" component="div">
+                                    Books
+                                </Typography>
+                                <Typography sx={{ textAlign: 'center', fontSize: '1rem' }} variant="body2" color="text.secondary">
+                                    View and manage books
+                                </Typography>
+                            </CardContent>
+                        </CardActionArea>
+                    </Card>
+                </Grid2>
             </Grid2>
-            <Grid2 item>
-                <Card sx={{ width: 300, opacity: 0.8 }} onClick={() => handleCardClick('/books')}>
-                    <CardActionArea>
-                        <CardContent>
-                            <Typography sx={{ textAlign: 'center' }} variant="h5" component="div">
-                                Books
-                            </Typography>
-                            <Typography sx={{ textAlign: 'center' }} variant="body2" color="text.secondary">
-                                View and manage books
-                            </Typography>
-                        </CardContent>
-                    </CardActionArea>
-                </Card>
-            </Grid2>
-        </Grid2>
+        </div>
     );
 };
 

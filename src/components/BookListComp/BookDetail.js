@@ -4,10 +4,12 @@ import { Card, CardContent, Typography, Button } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
 import { borrowBook } from '../../services/bookService';
 import { setLoading, loadUsers } from '../../redux/slices/usersSlice';
+import { useNavigate } from 'react-router-dom';
 
 const BookDetail = () => {
     const dispatch = useDispatch();
     const book = useSelector((state) => state.books.selectedBook);
+    const navigate = useNavigate();
     const users = useSelector((state) => state.users.list);
     const [selectedUserId, setSelectedUserId] = React.useState(null);
 
@@ -25,6 +27,7 @@ const BookDetail = () => {
             const response = await borrowBook(selectedUserId, book.id);
             console.log('Book borrowed:', response);
             alert('Book borrowed successfully!');
+            navigate("/")
         } catch (error) {
             console.error('Error borrowing book:', error);
             alert(error.message);
@@ -44,7 +47,8 @@ const BookDetail = () => {
     };
 
     return (
-        <Card sx={{ opacity: 0.8, maxWidth: 800, margin: 'auto', p: 2 }}>
+        <Card sx={{ position: 'relative', opacity: 0.8, maxWidth: 800, margin: 'auto', p: 2 }}>
+
             <CardContent>
                 <Typography className='subtitle' sx={{ fontStyle: 'italic', fontSize: '1.2rem', fontWeight: 600, textAlign: 'center', mb: 5 }}>
                     {book.title}
@@ -67,6 +71,12 @@ const BookDetail = () => {
                         rowsPerPageOptions={[5]}
                         onRowClick={handleRowClick}
                         autoHeight
+                        sx={{
+                            "& .MuiDataGrid-row:hover": {
+                                cursor: 'pointer',
+                                backgroundColor: '#f5f5f5',
+                            },
+                        }}
                     />
                 </div>
 

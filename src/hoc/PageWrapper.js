@@ -8,6 +8,7 @@ const PageWrapper = (WrappedComponent) => {
             style={{
                 position: 'relative',
                 display: 'flex',
+                flexDirection: 'column',
                 alignItems: 'center',
                 justifyContent: 'center',
                 padding: '20px',
@@ -32,7 +33,6 @@ const PageWrapper = (WrappedComponent) => {
                     zIndex: -1,
                 }}
             />
-
             <div style={{ zIndex: 1, width: '100%' }}>
                 <WrappedComponent {...props} />
             </div>

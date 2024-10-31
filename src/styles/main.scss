@@ -28,9 +28,9 @@ p,
 }
 
 .title {
-    font-size: 2rem;
+    font-size: 2.6rem;
     font-weight: 900;
-    color: #000000;
+    color: #ffffff;
 }
 
 .subtitle {
@@ -74,4 +74,10 @@ p,
 
 .data-grid-row:hover {
     cursor: pointer;
+}
+
+.typography .title {
+    font-size: 4.5rem;
+    font-weight: 900;
+    color: #000000;
 }

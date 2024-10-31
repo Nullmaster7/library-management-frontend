@@ -21,30 +21,53 @@ const UserDetail = () => {
     if (loading) return <p>Loading...</p>;
     if (!user) return <p>No user selected.</p>;
 
+    const currentlyBorrowedBooks = user.BorrowingHistories?.filter(book => book.returnedAt === null) || [];
+    const borrowingHistories = user.BorrowingHistories?.filter(book => book.returnedAt !== null) || [];
+
     return (
-        <Card sx={{ maxWidth: 800, margin: 'auto', padding: 2 }}>
+        <Card sx={{ opacity: 0.8, maxWidth: 800, margin: 'auto', padding: 2 }}>
             <CardContent>
                 <Typography variant="h5">{user.name}</Typography>
-                <Typography variant="subtitle1">Borrowing Histories:</Typography>
+
+                <Typography sx={{ mt: 3, fontSize: '1rem', fontWeight: 700, color: '#000000' }}>Currently Borrowed:</Typography>
                 <List>
-                    {user.BorrowingHistories && user.BorrowingHistories.length > 0 ? (
-                        user.BorrowingHistories.map((history) => (
+                    {currentlyBorrowedBooks.length > 0 ? (
+                        currentlyBorrowedBooks.map((history) => (
                             <ListItem key={history.id}>
                                 <ListItemText
-                                    primary={`${history.Book.title} - Rating: ${history.rating !== null ? history.rating : 'N/A'}`}
+                                    primary={`${history.Book.title} by ${history.Book.author}`}
                                 />
-                                {history.returnedAt === null &&
-                                    <Button
-                                        variant="contained"
-                                        color="secondary"
-                                        onClick={() => handleReturnBook(history.bookId)}
-                                    >
-                                        Return
-                                    </Button>}
+                                <Button
+                                    variant="contained"
+                                    color="secondary"
+                                    onClick={() => handleReturnBook(history.bookId)}
+                                >
+                                    Return
+                                </Button>
                             </ListItem>
                         ))
                     ) : (
                         <Typography>No books currently borrowed.</Typography>
+                    )}
+                </List>
+
+                <Typography sx={{ mt: 3, fontSize: '1rem', fontWeight: 700, color: '#000000' }}>Borrowing Histories:</Typography>
+                <List>
+                    {borrowingHistories.length > 0 ? (
+                        borrowingHistories.map((history) => (
+                            <ListItem key={history.id}>
+                                <ListItemText
+                                    primary={
+                                        <span>
+                                            <strong>{history.Book.title}</strong> by {history.Book.author} <strong> - Rating :</strong> {history.Book.rating ? history.Book.rating : 'No Rating'}
+                                        </span>
+                                    }
+                                    secondary={`Returned on: ${new Date(history.returnedAt).toLocaleDateString()}`}
+                                />
+                            </ListItem>
+                        ))
+                    ) : (
+                        <Typography >No borrowing history available.</Typography>
                     )}
                 </List>
             </CardContent>
