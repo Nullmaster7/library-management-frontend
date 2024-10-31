@@ -21,5 +21,10 @@ Ensure you have the following installed on your local machine:
 1. **Clone the repository**:
 
    ```bash
-   git clone https://github.com/your-username/library-management-frontend.git
-   cd library-management-frontend
+   git clone https://github.com/Nullmaster7/library-management-frontend.git
+   
+   npm install
+
+   create .env file in the root directory and add The base URL for the backend API : REACT_APP_API_URL=http://localhost:3001
+
+   npm run start
