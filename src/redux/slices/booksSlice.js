@@ -20,8 +20,9 @@ export const { setBooks, setSelectedBook, setLoading } = booksSlice.actions;
 export const loadBooks = () => async (dispatch) => {
     dispatch(setLoading(true));
     try {
-        const books = await fetchBooks();
-        dispatch(setBooks(books));
+        const availableBooks = await fetchBooks();
+
+        dispatch(setBooks(availableBooks));
     } catch (error) {
         console.error("Error fetching books:", error);
     } finally {

@@ -1,11 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchCurrentOwner } from '../../services/borrowingService';
 
 const borrowingHistoriesSlice = createSlice({
     name: 'borrowingHistories',
     initialState: {
         list: [],
         loading: false,
+        fetchedBooks: [],
     },
     reducers: {
         setBorrowingHistories: (state, action) => {
@@ -14,24 +14,17 @@ const borrowingHistoriesSlice = createSlice({
         setLoading: (state, action) => {
             state.loading = action.payload;
         },
+        addFetchedBook: (state, action) => {
+            state.fetchedBooks.push(action.payload);
+        },
+        clearBorrowingHistories: (state) => {
+            state.list = [];
+            state.loading = false;
+            state.fetchedBooks = [];
+        },
     },
 });
 
-
-export const { setBorrowingHistories, setLoading } = borrowingHistoriesSlice.actions;
-
-
-export const loadBorrowingHistories = (bookId) => async (dispatch) => {
-    dispatch(setLoading(true));
-    try {
-        const histories = await fetchCurrentOwner(bookId);
-        dispatch(setBorrowingHistories(histories));
-    } catch (error) {
-        console.error("Error fetching borrowing histories:", error);
-    } finally {
-        dispatch(setLoading(false));
-    }
-};
-
+export const { setBorrowingHistories, setLoading, addFetchedBook, clearBorrowingHistories } = borrowingHistoriesSlice.actions;
 
 export default borrowingHistoriesSlice.reducer;

@@ -1,49 +1,21 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Card, CardContent, Typography, Button } from '@mui/material';
-import { DataGrid } from '@mui/x-data-grid'; // Import DataGrid
+import { DataGrid } from '@mui/x-data-grid';
 import { borrowBook } from '../../services/bookService';
-import { setLoading, loadUsers } from '../../redux/slices/usersSlice'; // Import loadUsers action
-import { loadBorrowingHistories } from '../../redux/slices/borrowingHistoriesSlice';
-import { fetchCurrentOwner } from '../../services/borrowingService';
+import { setLoading, loadUsers } from '../../redux/slices/usersSlice';
 
 const BookDetail = () => {
     const dispatch = useDispatch();
     const book = useSelector((state) => state.books.selectedBook);
     const users = useSelector((state) => state.users.list);
-    const borrowingHistory = useSelector((state) => state.borrowingHistories);
     const [selectedUserId, setSelectedUserId] = React.useState(null);
-    const [currentOwnerState, setCurrentOwnerState] = React.useState(null);
 
     useEffect(() => {
         if (book) {
-            dispatch(loadBorrowingHistories(book.id));
-            const getCurrentOwner = async () => {
-                try {
-                    const owner = await fetchCurrentOwner(book.id);
-                    setCurrentOwnerState(owner);
-                } catch (error) {
-                    console.error('Error fetching current owner:', error);
-                }
-            };
-
-            getCurrentOwner();
+            dispatch(loadUsers());
         }
-        dispatch(loadUsers());
     }, [dispatch, book]);
-
-    const getCurrentOwner = () => {
-        if (borrowingHistory && borrowingHistory.bookId === book.id && !borrowingHistory.returnedAt) {
-            const userId = borrowingHistory.userId; // Get userId directly from the object
-            const currentUser = users.find((user) => user.id === userId);
-            return currentUser || null;
-        }
-        return null;
-    };
-
-    const currentOwner = getCurrentOwner();
-    console.log('Current Owner:', currentOwner);
-
 
     if (!book) return <p>Select a book to view its details.</p>;
 
@@ -86,11 +58,6 @@ const BookDetail = () => {
                 <Typography sx={{ mb: 2 }} color="subtitle text-secondary">
                     <strong>Average Rating:</strong> {book.rating || 'N/A'}
                 </Typography>
-                {borrowingHistory.list.User && (
-                    <Typography sx={{ mb: 2 }} color="subtitle text-secondary">
-                        <strong>Current Owner:</strong> {borrowingHistory.list.User.name}
-                    </Typography>
-                )}
 
                 <div style={{ height: 300, width: '100%', marginBottom: '20px' }}>
                     <DataGrid
@@ -112,7 +79,7 @@ const BookDetail = () => {
                     variant="contained"
                     color="primary"
                     onClick={handleLendBook}
-                    disabled={!selectedUserId || borrowingHistory.list.User.name}
+                    disabled={!selectedUserId}
                 >
                     Lend the book
                 </Button>
