@@ -9,6 +9,13 @@ It provides an interface for managing users and books in the system.
 - `public/`: Static files and public assets.
 - `README.md`: Project documentation.
 
+## Tech Stack
+- React.js - Component-based library for building UI.
+- Material-UI - Component library for responsive and accessible designs.
+- SCSS - CSS preprocessor for custom styles.
+- Redux Toolkit - State management solution.
+- Axios - For API requests.
+
 ## Prerequisites
 
 Ensure you have the following installed on your local machine:
@@ -27,4 +34,4 @@ Ensure you have the following installed on your local machine:
 
    create .env file in the root directory and add The base URL for the backend API : REACT_APP_API_URL=http://localhost:3001
 
-   npm run start
+   npm run start - Runs the app in development mode.
