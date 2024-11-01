@@ -32,6 +32,4 @@ Ensure you have the following installed on your local machine:
    
    npm install
 
-   create .env file (IF THERE IS NOT) in the root directory and add The base URL for the backend API : REACT_APP_API_URL=http://localhost:3001
-
    npm run start - Runs the app in development mode.
